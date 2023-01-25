@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserRole } from '@services/interfaces';
 import { UserEntity } from '../user/entities/user.entity';
 import { UserRepository } from '../user/repositories/user.repository';
-import { RegisterDto } from './auth.controller';
+import { AccountRegister } from '@services/contracts'; 
 
 @Injectable()
 export class AuthService {
@@ -12,7 +12,7 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) {}
 
-    async register({ email, password, displayName }: RegisterDto) {
+    async register({ email, password, displayName }: AccountRegister.Request) {
         const oldUser = await this.userRepository.findUser(email)
         if (oldUser) {
             throw new Error('Такой пользователь уже есть')

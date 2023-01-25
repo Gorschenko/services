@@ -4,6 +4,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { getMongoConfig } from './configs/mongo.config';
+import { RMQModule } from 'nestjs-rmq';
+import { getRMQConfig } from './configs/rmq.config';
 
 @Module({
   imports: [
@@ -11,6 +13,7 @@ import { getMongoConfig } from './configs/mongo.config';
       isGlobal: true,
       envFilePath: 'envs/.account.env',
     }),
+    RMQModule.forRootAsync(getRMQConfig()),
     UserModule,
     AuthModule,
     MongooseModule.forRootAsync(getMongoConfig())

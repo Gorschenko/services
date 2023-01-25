@@ -17,6 +17,7 @@
     "class-validator": "^0.14.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.4",
+    "nestjs-rmq": "^2.8.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
