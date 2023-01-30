@@ -1,4 +1,4 @@
-import { IsEmail, IsString } from 'class-validator'
+import { IsEmail, IsOptional, IsString } from 'class-validator'
 
 export namespace AccountRegister {
     export const topic = 'account.register.command'
@@ -10,6 +10,7 @@ export namespace AccountRegister {
         @IsString()
         password: string
         
+        @IsOptional()
         @IsString()
         displayName?: string
     }
