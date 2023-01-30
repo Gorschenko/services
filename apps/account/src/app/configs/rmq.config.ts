@@ -8,7 +8,7 @@ export const getRMQConfig = (): IRMQServiceAsyncOptions => ({
         exchangeName: configService.get('AMQP_EXCHANGE') ?? '',
         connections: [
             {
-                login: configService.get('AMQ_USER') ?? '',
+                login: configService.get('AMQP_USER') ?? '',
                 password: configService.get('AMQP_PASSWORD') ?? '',
                 host: configService.get('AMQP_HOSTNAME') ?? '',
             }
