@@ -1,5 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { AccountChangeProfile } from '@services/contracts';
+import { AccountBuyCourse, AccountChangeProfile, AccountCheckPayment } from '@services/contracts';
 import { RMQValidate, RMQRoute } from 'nestjs-rmq';
 import { UserEntity } from './user/entities/user.entity';
 import { UserRepository } from './user/repositories/user.repository';
@@ -20,5 +20,17 @@ export class UserCommands {
         const userEntity = new UserEntity(existedIUser).updateProfile(user.displayName)
         await this.userRepository.updateUser(userEntity)
         return {}
+    }
+
+    @RMQValidate()
+    @RMQRoute(AccountBuyCourse.topic)
+    async buyCourse(@Body() { userId, courseId }: AccountBuyCourse.Request): Promise<AccountBuyCourse.Response> {
+
+    }
+
+    @RMQValidate()
+    @RMQRoute(AccountCheckPayment.topic)
+    async checkPayment(@Body() { userId, courseId }: AccountCheckPayment.Request): Promise<AccountCheckPayment.Response> {
+
     }
 }
