@@ -13,5 +13,3 @@ export namespace AccountUserCourses {
         courses: IUserCourses[]
     }
 }
-
-

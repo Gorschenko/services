@@ -13,5 +13,3 @@ export namespace AccountUserInfo {
         profile: Omit<IUser, 'passwordHash'>
     }
 }
-
-
