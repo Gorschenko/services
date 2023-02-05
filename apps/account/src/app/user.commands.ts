@@ -9,8 +9,8 @@ export class UserCommands {
 
     @RMQValidate()
     @RMQRoute(AccountChangeProfile.topic)
-    async changeProfile(@Body() { user, id }: AccountChangeProfile.Request): Promise<AccountChangeProfile.Response> {
-        return this.userService.changeProfile(user, id)
+    async changeProfile(@Body() { displayName, id }: AccountChangeProfile.Request): Promise<AccountChangeProfile.Response> {
+        return this.userService.changeProfile( displayName, id)
     }
 
     @RMQValidate()

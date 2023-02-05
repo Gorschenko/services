@@ -1,15 +1,14 @@
-import { IsString } from 'class-validator'
-import { IUser } from '@services/interfaces'
+import { IsMongoId, IsString } from 'class-validator'
 
 export namespace AccountChangeProfile {
     export const topic = 'account.change-profile.command'
 
     export class Request {
-        @IsString()
+        @IsMongoId()
         id: string
         
         @IsString()
-        user: Pick<IUser, 'displayName'>
+        displayName: string
     }
     
     export class Response {

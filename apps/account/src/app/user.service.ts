@@ -14,12 +14,12 @@ export class UserService {
         private readonly userEventEmiter: UserEventEmiter,
     ) {}
     
-    public async changeProfile(user: Pick<IUser, 'displayName'>, id: string) {
+    public async changeProfile(displayName: string, id: string) {
         const existedIUser = await this.userRepository.findById(id)
         if (!existedIUser) {
             throw new Error('Такого пользователя не существует')
         }
-        const userEntity = new UserEntity(existedIUser).updateProfile(user.displayName)
+        const userEntity = new UserEntity(existedIUser).updateProfile(displayName)
         await this.updateUser(userEntity)
         return {}
     }
