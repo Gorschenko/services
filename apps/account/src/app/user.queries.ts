@@ -17,7 +17,7 @@ export class UserQueries {
         const user = await this.userRepository.findById(id)
         const profile = new UserEntity(user).getPublicProfile()
         return {
-            profile
+            user: profile,
         }
     }
 

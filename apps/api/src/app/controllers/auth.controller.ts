@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Post, UnauthorizedException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AccountLogin, AccountRegister } from '@services/contracts'
 import { RMQService } from 'nestjs-rmq';
 import { LoginDto } from '../dtos/login.dto';
@@ -10,8 +10,9 @@ export class AuthController {
         private readonly rmqService: RMQService
     ) {}
 
+    @UsePipes(ValidationPipe)
     @Post('register')
-    async register(@Body() dto: RegisterDto) {
+    async register(@Body() dto: RegisterDto): Promise<AccountRegister.Response> {
         try {
             return this.rmqService.send<AccountRegister.Request, AccountRegister.Response>(AccountRegister.topic, dto)
         } catch (e) {
@@ -21,8 +22,9 @@ export class AuthController {
         }
     }
 
+    @UsePipes(ValidationPipe)
     @Post('login')
-    async login(@Body() dto: LoginDto) {
+    async login(@Body() dto: LoginDto): Promise<AccountLogin.Response> {
         try {
             return this.rmqService.send<AccountLogin.Request, AccountLogin.Response>(AccountLogin.topic, dto)
         } catch (e) {
