@@ -12,7 +12,7 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Get('info')
-    async info(@UserId() id: string) {
+    async info(@UserId () id: string) {
         try {
             return this.rmqService.send<AccountUserInfo.Request, AccountUserInfo.Response>(AccountUserInfo.topic, { id })
         } catch (e) {
@@ -22,4 +22,3 @@ export class UserController {
         }
     }
 }
-
