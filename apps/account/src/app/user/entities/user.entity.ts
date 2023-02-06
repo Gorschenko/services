@@ -20,6 +20,10 @@ export class UserEntity implements IUser {
         this.courses = user.courses
     }
 
+    public getCourseState(courseId: string): PurchaseState {
+		return this.courses.find(c => c.courseId === courseId)?.purchaseState ?? PurchaseState.Started;
+	}
+    
     public setCourseStatus (courseId: string, state: PurchaseState) {
         const exist = this.courses.find(c => c._id === courseId)
         if (!exist) {
