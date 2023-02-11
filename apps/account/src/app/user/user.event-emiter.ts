@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { RMQService } from 'nestjs-rmq';
-import { UserEntity } from './user/entities/user.entity';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserEventEmiter {

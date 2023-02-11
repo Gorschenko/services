@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.init();
   Logger.log(
-    `🚀 Application is running`
+    `🚀 Account microservice is running`
   );
 }
 

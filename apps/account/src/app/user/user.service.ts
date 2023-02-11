@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { RMQService } from 'nestjs-rmq';
 import { UserEventEmiter } from './user.event-emiter';
-import { UserEntity } from './user/entities/user.entity';
-import { UserRepository } from './user/repositories/user.repository';
-import { BuyCourseSaga } from './user/sagas/buy-course.saga';
+import { UserEntity } from './entities/user.entity';
+import { UserRepository } from './repositories/user.repository';
+import { BuyCourseSaga } from './sagas/buy-course.saga';
 
 @Injectable()
 export class UserService {
