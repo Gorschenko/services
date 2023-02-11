@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { IUser } from '@services/interfaces';
 import { RMQService } from 'nestjs-rmq';
 import { UserEventEmiter } from './user.event-emiter';
 import { UserEntity } from './user/entities/user.entity';
@@ -21,7 +20,7 @@ export class UserService {
         }
         const userEntity = new UserEntity(existedIUser).updateProfile(displayName)
         await this.updateUser(userEntity)
-        return {}
+        return userEntity.getPublicProfile()
     }
 
     public async buyCourse(userId: string, courseId: string) {

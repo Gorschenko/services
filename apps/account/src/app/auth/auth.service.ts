@@ -24,7 +24,11 @@ export class AuthService {
             role: UserRole.Student,
         }).setPassword(password)
         const newUser = await this.userRepository.createUser(newUserEntity)
-        return { email: newUser.email }
+        const userToReturn = new UserEntity(newUser).getPublicProfile()
+
+        return {
+            user: userToReturn
+        }
     }
 
     async validateUser(email: string, password: string) {
