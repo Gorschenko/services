@@ -8,10 +8,13 @@ import {
     ValidationPipe,
     UsePipes,
     Put,
+    Post,
 } from '@nestjs/common';
-import { AccountChangeProfile, AccountUserCourses, AccountUserInfo } from '@services/contracts';
+import { AccountBuyCourse, AccountChangeProfile, AccountUserCourses, AccountUserInfo } from '@services/contracts';
 import { IUser } from '@services/interfaces';
 import { RMQService } from 'nestjs-rmq';
+import { BuyCourseDto } from '../dtos/buy-course.dto';
+import { ChangeProfileDto } from '../dtos/change-profie.dto';
 import { JwtAuthGuard } from '../guards/jwt.guard';
 import { UserId } from '../guards/user.decorator';
 
@@ -48,9 +51,21 @@ export class UserController {
 
     @UsePipes(ValidationPipe)
     @Put()
-    async changeProfile(@Body() { displayName }: Pick<IUser, 'displayName'>, @UserId() id: string ): Promise<AccountChangeProfile.Response> {
+    async changeProfile(@Body() { displayName }: ChangeProfileDto, @UserId() id: string ): Promise<AccountChangeProfile.Response> {
         try {
             return this.rmqService.send<AccountChangeProfile.Request, AccountChangeProfile.Response>(AccountChangeProfile.topic, { id, displayName })
+        } catch (e) {
+            if (e instanceof Error) {
+                throw new BadRequestException(e.message)
+            }
+        }
+    }
+    
+    @UsePipes(ValidationPipe)
+    @Post()
+    async buyCourse(@Body() { courseId }: BuyCourseDto, @UserId() userId: string): Promise<AccountBuyCourse.Response> {
+        try {
+            return this.rmqService.send<AccountBuyCourse.Request, AccountBuyCourse.Response>(AccountBuyCourse.topic, { courseId, userId })
         } catch (e) {
             if (e instanceof Error) {
                 throw new BadRequestException(e.message)

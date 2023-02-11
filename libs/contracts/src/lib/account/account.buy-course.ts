@@ -1,13 +1,13 @@
-import { IsString } from 'class-validator'
+import { IsMongoId } from 'class-validator'
 
 export namespace AccountBuyCourse {
     export const topic = 'account.buy-course.command'
 
     export class Request {
-        @IsString()
+        @IsMongoId()
         userId: string
 
-        @IsString()
+        @IsMongoId()
         courseId: string
     }
     
