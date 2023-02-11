@@ -1,13 +1,13 @@
 import { Body, Controller, Post, UnauthorizedException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AccountLogin, AccountRegister } from '@services/contracts'
 import { RMQService } from 'nestjs-rmq';
-import { LoginDto } from '../dtos/login.dto';
-import { RegisterDto } from '../dtos/register.dto';
+import { LoginDto } from '../dtos/auth/login.dto';
+import { RegisterDto } from '../dtos/auth/register.dto';
 
 @Controller('auth')
 export class AuthController {
     constructor(
-        private readonly rmqService: RMQService
+        private readonly rmqService: RMQService,
     ) {}
 
     @UsePipes(ValidationPipe)

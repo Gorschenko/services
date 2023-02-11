@@ -11,10 +11,9 @@ import {
     Post,
 } from '@nestjs/common';
 import { AccountBuyCourse, AccountChangeProfile, AccountUserCourses, AccountUserInfo } from '@services/contracts';
-import { IUser } from '@services/interfaces';
 import { RMQService } from 'nestjs-rmq';
-import { BuyCourseDto } from '../dtos/buy-course.dto';
-import { ChangeProfileDto } from '../dtos/change-profie.dto';
+import { BuyCourseDto } from '../dtos/user/buy-course.dto';
+import { ChangeProfileDto } from '../dtos/user/change-profie.dto';
 import { JwtAuthGuard } from '../guards/jwt.guard';
 import { UserId } from '../guards/user.decorator';
 
