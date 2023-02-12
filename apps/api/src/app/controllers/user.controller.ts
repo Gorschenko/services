@@ -24,7 +24,6 @@ export class UserController {
         private readonly rmqService: RMQService,
     ) {}
 
-    
     @Get('info')
     async getUser(@UserId() id: string): Promise<AccountUserInfo.Response> {
         try {
@@ -35,7 +34,6 @@ export class UserController {
             }
         }
     }
-
 
     @Get('courses')
     async getCourses(@UserId() id: string): Promise<AccountUserCourses.Response> {
@@ -61,7 +59,7 @@ export class UserController {
     }
     
     @UsePipes(ValidationPipe)
-    @Post()
+    @Post('course')
     async buyCourse(@Body() { courseId }: BuyCourseDto, @UserId() userId: string): Promise<AccountBuyCourse.Response> {
         try {
             return this.rmqService.send<AccountBuyCourse.Request, AccountBuyCourse.Response>(AccountBuyCourse.topic, { courseId, userId })

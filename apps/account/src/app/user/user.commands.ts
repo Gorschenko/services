@@ -15,13 +15,13 @@ export class UserCommands {
 
     @RMQValidate()
     @RMQRoute(AccountBuyCourse.topic)
-    async buyCourse(@Body() { userId, courseId }: AccountBuyCourse.Request): Promise<AccountBuyCourse.Response> {
-        return this.userService.buyCourse(userId, courseId)
+    async buyCourse(@Body() { courseId, userId }: AccountBuyCourse.Request): Promise<AccountBuyCourse.Response> {
+        return this.userService.buyCourse(courseId, userId)
     }
 
     @RMQValidate()
     @RMQRoute(AccountCheckPayment.topic)
-    async checkPayment(@Body() { userId, courseId }: AccountCheckPayment.Request): Promise<AccountCheckPayment.Response> {
-        return this.userService.checkPayment(userId, courseId)
+    async checkPayment(@Body() { courseId, userId }: AccountCheckPayment.Request): Promise<AccountCheckPayment.Response> {
+        return this.userService.checkPayment(courseId, userId)
     }
 }

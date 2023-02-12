@@ -8,6 +8,7 @@ export class BuyCourseSagaStateStarted extends BuyCourseSagaState {
         const { course } = await this.saga.rmqService.send<CourseGetCourse.Request, CourseGetCourse.Response>(CourseGetCourse.topic, {
             id: this.saga.courseId
         })
+        
         if (!course) {
             throw new Error('Такого курса не существует')
         }

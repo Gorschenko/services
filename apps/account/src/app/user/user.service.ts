@@ -23,7 +23,7 @@ export class UserService {
         return userEntity.getPublicProfile()
     }
 
-    public async buyCourse(userId: string, courseId: string) {
+    public async buyCourse(courseId: string, userId: string) {
         const existedUser = await this.userRepository.findById(userId)
         if (!existedUser){
             throw new Error('Такого пользователя нет')
@@ -35,7 +35,7 @@ export class UserService {
         return { paymentLink }
     }
 
-    public async checkPayment(userId: string, courseId: string) {
+    public async checkPayment(courseId: string, userId: string) {
         const existedUser = await this.userRepository.findById(userId)
         if (!existedUser){
             throw new Error('Такого пользователя нет')

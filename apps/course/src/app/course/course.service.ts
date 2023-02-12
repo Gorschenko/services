@@ -10,4 +10,14 @@ export class CourseService {
         const newCourse = await this.courseRepository.createCourse(course)
         return { course: newCourse }
     }
+
+    async getCourse(id: string): Promise<{ course: ICourse }> {
+        const course = await this.courseRepository.findById(id)
+        if (!course) {
+            throw new Error('Такого курса нет')
+        }
+        return {
+            course
+        }
+    }   
 }

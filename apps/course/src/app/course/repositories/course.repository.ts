@@ -14,4 +14,8 @@ export class CourseRepository {
         const newCourse = new this.courseModel(course)
         return newCourse.save()
     }
+
+    async findById(id: string): Promise<ICourse | null> {
+        return await this.courseModel.findById(id).exec()
+    }
 }
