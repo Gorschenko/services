@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
-@Injectable()
+@Controller()
 export class CourseCommands {
     
 }

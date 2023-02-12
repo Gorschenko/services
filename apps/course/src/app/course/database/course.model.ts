@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { CourseCategory, CourseLanguage, CourseLevel, ICourse } from '@services/interfaces';
-import { Types } from 'mongoose';
+import { Types, Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Course extends Document implements ICourse {
@@ -13,19 +13,23 @@ export class Course extends Document implements ICourse {
     @Prop({ required: true })
     price: number
 
-    @Prop({ required: true, enum: CourseLevel })
+    @Prop({
+        required: true,
+        enum: CourseLevel,
+        type: String,
+    })
     level: CourseLevel
 
     @Prop({
         required: true,
-        type: [CourseCategory],
+        type: String,
         enum: CourseCategory,
     })
     category: Types.Array<CourseCategory>
 
     @Prop({
         required: true,
-        type: [CourseLanguage],
+        type: String,
         enum: CourseCategory,
     })
     language: Types.Array<CourseLanguage>

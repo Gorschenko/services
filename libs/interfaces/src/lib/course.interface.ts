@@ -6,7 +6,7 @@ export enum CourseLevel {
 }
 
 export enum CourseCategory {
-    Fronted = 'fronted',
+    Frontend = 'frontend',
     Backend = 'backend',
     QA = 'qa',
     Devops = 'devops',
