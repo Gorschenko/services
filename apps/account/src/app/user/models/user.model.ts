@@ -13,7 +13,7 @@ export class UserCourses extends Document implements IUserCourses {
 
 export const UserCoursesSchema = SchemaFactory.createForClass(UserCourses)
 
-@Schema()
+@Schema({ timestamps: true })
 export class User extends Document implements IUser {
     @Prop()
     displayName?: string
