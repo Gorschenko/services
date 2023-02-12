@@ -28,6 +28,6 @@ export interface ICourse {
     name: string
     price: number
     level: CourseLevel
-    category: CourseCategory[]
-    language: CourseLanguage[]
+    category: CourseCategory
+    languages: CourseLanguage[]
 }

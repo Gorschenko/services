@@ -6,8 +6,8 @@ export class CourseEntity implements ICourse {
     name: string
     price: number
     level: CourseLevel
-    category: CourseCategory[]
-    language: CourseLanguage[]
+    category: CourseCategory
+    languages: CourseLanguage[]
 
 
     constructor (course: ICourse) {
@@ -17,6 +17,6 @@ export class CourseEntity implements ICourse {
         this.price = course.price
         this.level = course.level
         this.category = course.category
-        this.language = course.language
+        this.languages = course.languages
     }
 }

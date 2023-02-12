@@ -25,14 +25,14 @@ export class Course extends Document implements ICourse {
         type: String,
         enum: CourseCategory,
     })
-    category: Types.Array<CourseCategory>
+    category: CourseCategory
 
     @Prop({
         required: true,
-        type: String,
+        type: () => [String],
         enum: CourseCategory,
     })
-    language: Types.Array<CourseLanguage>
+    languages: Types.Array<CourseLanguage>
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course)

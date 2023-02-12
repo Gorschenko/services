@@ -1,4 +1,5 @@
 import { CourseCategory, CourseLanguage, CourseLevel, ICourse } from '@services/interfaces';
+import { Type } from 'class-transformer';
 import { IsArray, IsEnum, IsNumber, IsString } from 'class-validator';
 
 export class CreateCourseDto implements Omit<ICourse, 'ownerId'> {
@@ -7,15 +8,16 @@ export class CreateCourseDto implements Omit<ICourse, 'ownerId'> {
 
     @IsNumber()
     price: number
-
+    
+    @IsString()
     @IsEnum(CourseLevel)
     level: CourseLevel
 
-    @IsArray()
+    @IsString()
     @IsEnum(CourseCategory)
-    category: CourseCategory[]
+    category: CourseCategory
 
     @IsArray()
-    @IsEnum(CourseLanguage)
-    language: CourseLanguage[]
+    @IsEnum(CourseLanguage, { each: true })
+    languages: CourseLanguage[]
 }

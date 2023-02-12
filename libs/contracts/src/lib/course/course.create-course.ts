@@ -17,13 +17,12 @@ export namespace CourseCreateCourse {
         @IsEnum(CourseLevel)
         level: CourseLevel
     
-        @IsArray()
         @IsEnum(CourseCategory)
-        category: CourseCategory[]
+        category: CourseCategory
     
         @IsArray()
-        @IsEnum(CourseLanguage)
-        language: CourseLanguage[]
+        @IsEnum(CourseLanguage, { each: true })
+        languages: CourseLanguage[]
     }
 
     export class Response {

@@ -6,11 +6,12 @@ import { RMQModule } from 'nestjs-rmq';
 import { getJWTConfig } from './configs/jwt.config';
 import { getRMQConfig } from './configs/rmq.config';
 import { AuthController } from './controllers/auth.controller';
+import { CourseController } from './controllers/course.controller';
 import { UserController } from './controllers/user.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
-  controllers: [AuthController, UserController],
+  controllers: [AuthController, UserController, CourseController],
   imports: [
     ConfigModule.forRoot({
       envFilePath: 'envs/.api.env',
