@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ICourse } from '@services/interfaces';
-import { CourseRepository } from './repositories/course.repository';
+import { CourseRepository } from './course.repository';
 
 @Injectable()
 export class CourseService {

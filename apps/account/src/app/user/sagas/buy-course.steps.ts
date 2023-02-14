@@ -1,6 +1,6 @@
 import { CourseGetCourse, PaymentCheck, PaymentGenerateLink, PaymentStatus } from '@services/contracts';
 import { PurchaseState } from '@services/interfaces';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../user.entity';
 import { BuyCourseSagaState } from './buy-course.state';
 
 export class BuyCourseSagaStateStarted extends BuyCourseSagaState {

@@ -3,8 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CourseCommands } from './controllers/course.commands';
 import { CourseQueries } from './controllers/course.queries';
 import { CourseService } from './course.service';
-import { Course, CourseSchema } from './database/course.model';
-import { CourseRepository } from './repositories/course.repository';
+import { Course, CourseSchema } from '../database/course.model';
+import { CourseRepository } from './course.repository';
 
 @Module({
     imports: [

@@ -1,8 +1,8 @@
 import { Body, Controller } from '@nestjs/common';
 import { AccountUserInfo, AccountUserCourses } from '@services/contracts';
 import { RMQValidate, RMQRoute } from 'nestjs-rmq';
-import { UserEntity } from './entities/user.entity';
-import { UserRepository } from './repositories/user.repository';
+import { UserEntity } from '../user.entity';
+import { UserRepository } from '../user.repository';
 
 
 @Controller()

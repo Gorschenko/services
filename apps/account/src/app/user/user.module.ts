@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserCommands } from './user.commands';
-import { UserEventEmiter } from './user.event-emiter';
-import { UserQueries } from './user.queries';
+import { UserCommands } from './controllers/user.commands';
+import { UserEventEmiter } from './controllers/user.event-emiter';
+import { UserQueries } from './controllers/user.queries';
 import { UserService } from './user.service';
-import { User, UserSchema } from './models/user.model';
-import { UserRepository } from './repositories/user.repository';
+import { User, UserSchema } from '../database/user.model';
+import { UserRepository } from './user.repository';
 
 @Module({
   imports: [

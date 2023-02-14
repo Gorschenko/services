@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { RMQService } from 'nestjs-rmq';
-import { UserEventEmiter } from './user.event-emiter';
-import { UserEntity } from './entities/user.entity';
-import { UserRepository } from './repositories/user.repository';
+import { UserEventEmiter } from './controllers/user.event-emiter';
+import { UserEntity } from './user.entity';
+import { UserRepository } from './user.repository';
 import { BuyCourseSaga } from './sagas/buy-course.saga';
 
 @Injectable()

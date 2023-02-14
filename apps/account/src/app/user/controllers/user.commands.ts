@@ -1,7 +1,7 @@
 import { Body, Controller } from '@nestjs/common';
 import { AccountBuyCourse, AccountChangeProfile, AccountCheckPayment } from '@services/contracts';
 import { RMQValidate, RMQRoute } from 'nestjs-rmq';
-import { UserService } from './user.service';
+import { UserService } from '../user.service';
 
 @Controller()
 export class UserCommands {

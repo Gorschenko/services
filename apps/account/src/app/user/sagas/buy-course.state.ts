@@ -1,5 +1,5 @@
 import { PaymentStatus } from '@services/contracts';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../user.entity';
 import { BuyCourseSaga } from './buy-course.saga';
 
 export abstract class BuyCourseSagaState {

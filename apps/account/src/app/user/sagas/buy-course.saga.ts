@@ -1,6 +1,6 @@
 import { PurchaseState } from '@services/interfaces';
 import { RMQService } from 'nestjs-rmq';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../user.entity';
 import { BuyCourseSagaState } from './buy-course.state';
 import {
     BuyCourseSagaStateCanceled,
