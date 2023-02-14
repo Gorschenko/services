@@ -19,5 +19,12 @@ export class CourseService {
         return {
             course
         }
-    }   
+    }
+    
+    async getAllCourses(): Promise<{ courses: ICourse[] }> {
+        const courses = await this.courseRepository.find()
+        return {
+            courses,
+        }
+    }
 }

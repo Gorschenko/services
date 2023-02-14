@@ -1,5 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { CourseGetCourse } from '@services/contracts';
+import { CourseGetCourse, CourseGetAllCourses } from '@services/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { CourseService } from '../course.service';
 
@@ -13,5 +13,11 @@ export class CourseQueries {
     @RMQRoute(CourseGetCourse.topic)
     async getCourse(@Body() { id }: CourseGetCourse.Request): Promise<CourseGetCourse.Response> {
         return this.courseService.getCourse(id)
+    }
+    
+
+    @RMQRoute(CourseGetAllCourses.topic)
+    async getAllCourses(): Promise<CourseGetAllCourses.Request> {
+        return this.courseService.getAllCourses()
     }
 }

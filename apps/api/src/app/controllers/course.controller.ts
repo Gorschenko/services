@@ -1,5 +1,5 @@
 import { BadRequestException, Body, Controller, Get, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
-import { CourseCreateCourse, CourseGetCourse } from '@services/contracts';
+import { CourseCreateCourse, CourseGetAllCourses, CourseGetCourse } from '@services/contracts';
 import { RMQService } from 'nestjs-rmq';
 import { CreateCourseDto } from '../dtos/course/create-course.dto';
 import { JwtAuthGuard } from '../guards/jwt.guard';
@@ -32,6 +32,17 @@ export class CourseController {
     async getCourse(@Param('courseId', IdValidationPipe) courseId: string): Promise<CourseCreateCourse.Response> {
         try {
             return this.rmqService.send<CourseGetCourse.Request, CourseGetCourse.Response>(CourseGetCourse.topic, { id: courseId })
+        } catch (e) {
+            if (e instanceof Error) {
+                throw new BadRequestException(e.message)
+            }
+        }
+    }
+
+    @Get()
+    async getAllCourses(): Promise<CourseGetAllCourses.Response> {
+        try {
+            return this.rmqService.send<object, CourseGetAllCourses.Response>(CourseGetAllCourses.topic, {})
         } catch (e) {
             if (e instanceof Error) {
                 throw new BadRequestException(e.message)

@@ -18,4 +18,8 @@ export class CourseRepository {
     async findById(id: string): Promise<ICourse | null> {
         return await this.courseModel.findById(id).exec()
     }
+
+    async find(): Promise<ICourse[]> {
+        return await this.courseModel.find().exec()
+    }
 }

@@ -11,4 +11,5 @@ export * from './lib/payment/payment.generate-link'
 export * from './lib/payment/payment.check'
 
 export * from './lib/course/course.get-course'
+export * from './lib/course/course.get-all-courses'
 export * from './lib/course/course.create-course'
