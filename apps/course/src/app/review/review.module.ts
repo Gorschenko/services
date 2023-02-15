@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Review, ReviewSchema } from '../database/review.model';
+import { ReviewCommands } from './controllers/review.command';
+import { ReviewQueries } from './controllers/review.queries';
+import { ReviewRepository } from './review.repository';
+import { ReviewService } from './review.service';
 
 @Module({
     imports: [
@@ -11,7 +15,7 @@ import { Review, ReviewSchema } from '../database/review.model';
             },
         ]),
     ],
-    providers: [],
-    controllers: [],
+    providers: [ReviewService, ReviewRepository],
+    controllers: [ReviewQueries, ReviewCommands],
 })
 export class ReviewModule {}
