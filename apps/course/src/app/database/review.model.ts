@@ -5,10 +5,9 @@ import { Document } from 'mongoose'
 
 @Schema({ timestamps: true })
 export class Review extends Document implements IReview {
-    @Prop({ required: true })
-    name: string
-
-    @Prop()
+    @Prop({
+        default: '',
+    })
     title?: string
 
     @Prop({ required: true })
@@ -18,7 +17,7 @@ export class Review extends Document implements IReview {
     rating: number
 
     @Prop({ required: true })
-    productId: string
+    courseId: string
 
     @Prop({ required: true })
     userId: string

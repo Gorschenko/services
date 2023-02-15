@@ -3,6 +3,6 @@ export class IReview {
     title?: string
     description: string
     rating: number
-    productId: string
+    courseId: string
     userId: string
 }

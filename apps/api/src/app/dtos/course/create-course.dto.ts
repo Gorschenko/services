@@ -1,5 +1,4 @@
 import { CourseCategory, CourseLanguage, CourseLevel, ICourse } from '@services/interfaces';
-import { Type } from 'class-transformer';
 import { IsArray, IsEnum, IsNumber, IsString } from 'class-validator';
 
 export class CreateCourseDto implements Omit<ICourse, 'ownerId'> {
