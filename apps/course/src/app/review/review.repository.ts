@@ -15,7 +15,19 @@ export class ReviewRepository {
         return newReview.save()
     }
 
+    async findById(reviewId: string): Promise<IReview | null> {
+        return await this.reviewModel.findOne({ _id: reviewId }).exec()
+    }
+
     async findByCourseId(courseId: string): Promise<IReview[]> {
         return await this.reviewModel.find({ courseId }).exec()
+    }
+
+    async findOneAndUpdate({ _id, ...rest }: IReview): Promise<IReview> {
+        return await this.reviewModel.findOneAndUpdate(
+            { _id },
+            { $set: { ...rest } },
+            { new: true }
+        )
     }
 }
