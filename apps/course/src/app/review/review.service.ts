@@ -15,4 +15,11 @@ export class ReviewService {
             review: newReview,
         }
     }
+
+    async getCourseReviews(courseId: string): Promise<{ reviews: IReview[] }> {
+        const reviews = await this.reviewRepository.findByCourseId(courseId)
+        return {
+            reviews
+        }
+    }
 }

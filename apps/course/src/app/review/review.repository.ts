@@ -10,8 +10,12 @@ export class ReviewRepository {
         @InjectModel(Review.name) private readonly reviewModel: Model<Review>
     ) {}
 
-    async createReview (review: IReview): Promise<IReview> {
+    async createReview(review: IReview): Promise<IReview> {
         const newReview = new this.reviewModel(review)
         return newReview.save()
+    }
+
+    async findByCourseId(courseId: string): Promise<IReview[]> {
+        return await this.reviewModel.find({ courseId }).exec()
     }
 }

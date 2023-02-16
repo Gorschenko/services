@@ -12,7 +12,6 @@ export class ReviewCommands {
     @RMQValidate()
     @RMQRoute(ReviewCreateReview.topic)
     async createCourse(@Body() review: ReviewCreateReview.Request): Promise<ReviewCreateReview.Response> {
-        console.log(review)
         return await this.reviewService.createCourse(review)
     }
 }

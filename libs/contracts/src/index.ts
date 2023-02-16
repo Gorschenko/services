@@ -15,3 +15,4 @@ export * from './lib/course/course.get-all-courses'
 export * from './lib/course/course.create-course'
 
 export * from './lib/review/review.create-review'
+export * from './lib/review/review.get-course-reviews'
