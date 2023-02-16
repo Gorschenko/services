@@ -16,3 +16,4 @@ export * from './lib/course/course.create-course'
 
 export * from './lib/review/review.create-review'
 export * from './lib/review/review.get-course-reviews'
+export * from './lib/review/review.update-review'

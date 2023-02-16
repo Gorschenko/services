@@ -9,7 +9,6 @@ export class ReviewService {
     ) {}
 
     async createCourse(review: IReview): Promise<{ review: IReview }> {
-        // сделать проверку на наличие курса (courseId)
         const newReview = await this.reviewRepository.createReview(review)
         return {
             review: newReview,
