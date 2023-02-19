@@ -15,9 +15,9 @@ export class CourseQueries {
         return this.courseService.getCourse(id)
     }
     
-
+    @RMQValidate()
     @RMQRoute(CourseGetAllCourses.topic)
-    async getAllCourses(): Promise<CourseGetAllCourses.Request> {
-        return this.courseService.getAllCourses()
+    async getAllCourses(@Body() { query }: CourseGetAllCourses.Request): Promise<CourseGetAllCourses.Response> {
+        return this.courseService.getAllCourses(query)
     }
 }

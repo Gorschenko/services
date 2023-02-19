@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { GetAllCoursesDto } from '@services/contracts';
 import { ICourse } from '@services/interfaces';
 import { CourseRepository } from './course.repository';
 
@@ -21,8 +22,8 @@ export class CourseService {
         }
     }
     
-    async getAllCourses(): Promise<{ courses: ICourse[] }> {
-        const courses = await this.courseRepository.find()
+    async getAllCourses(query: GetAllCoursesDto): Promise<{ courses: ICourse[] }> {
+        const courses = await this.courseRepository.find(query)
         return {
             courses,
         }

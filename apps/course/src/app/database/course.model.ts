@@ -4,7 +4,7 @@ import { Types, Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Course extends Document implements ICourse {
-    @Prop({ required: true })
+    @Prop({ required: true, type: Types.ObjectId, ref: 'User' })
     ownerId: string
 
     @Prop({ required: true })

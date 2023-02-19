@@ -24,8 +24,10 @@ export class ReviewRepository {
         const sortArgs = this.getSortArgs(query.sort)
         return await this.reviewModel
             .find({ courseId })
+            .limit(query.limit)
+            .skip(query.offset)
             .sort(sortArgs)
-            .exec() as IReview[]
+            .exec()
     }
 
     async findOneAndUpdate({ _id, ...rest }: IReview): Promise<IReview> {
