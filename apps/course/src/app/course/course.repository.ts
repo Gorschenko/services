@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { CourseSort, GetAllCoursesDto } from '@services/contracts';
+import { CourseSort, GetAllCoursesQueryDto } from '@services/contracts';
 import { ICourse } from '@services/interfaces';
 import { Model } from 'mongoose';
 import { Course } from '../database/course.model';
@@ -20,10 +20,11 @@ export class CourseRepository {
         return await this.courseModel.findById(id).exec()
     }
 
-    async find({ sort, offset, limit }: GetAllCoursesDto): Promise<ICourse[]> {
+    async find({ sort, offset, limit, category, level, languages }: GetAllCoursesQueryDto): Promise<ICourse[]> {
         const sortArgs = this.getSortArgs(sort)
+        const filters = this.getValidFilters({ category, level, languages })
         return await this.courseModel
-            .find()
+            .find(filters)
             .sort(sortArgs)
             .limit(limit)
             .skip(offset)
@@ -40,5 +41,14 @@ export class CourseRepository {
             default:
                 return { createdAt: -1 }
         }
+    }
+
+    getValidFilters(filters) {
+        return Object.entries(filters).reduce((acc, [k, v]) => {
+            if (v) {
+                acc[k] = v
+            }
+            return acc
+        }, {})
     }
 }

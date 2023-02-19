@@ -1,6 +1,6 @@
-import { ICourse } from '@services/interfaces'
+import { CourseCategory, CourseLanguage, CourseLevel, ICourse } from '@services/interfaces'
 import { Type } from 'class-transformer'
-import { IsEnum, IsOptional, Min, ValidateNested } from 'class-validator'
+import { IsArray, IsEnum, IsOptional, Min, ValidateNested } from 'class-validator'
 
 export enum CourseSort {
     PriceUp = 'priceUp',
@@ -8,7 +8,7 @@ export enum CourseSort {
     New = 'new',
 }
 
-export class GetAllCoursesDto {
+export class GetAllCoursesQueryDto {
     @IsEnum(CourseSort)
     @IsOptional()
     sort?: CourseSort
@@ -22,6 +22,20 @@ export class GetAllCoursesDto {
     @Type(() => Number)
     @IsOptional()
     limit?: number
+
+    
+    @IsEnum(CourseCategory)
+    @IsOptional()
+    category?: CourseCategory
+
+    @IsEnum(CourseLevel)
+    @IsOptional()
+    level?: CourseLevel
+    
+    @IsArray()
+    @IsEnum(CourseLanguage, { each: true })
+    @IsOptional()
+    languages?: CourseLanguage[]
 }
 
 export namespace CourseGetAllCourses {
@@ -29,9 +43,9 @@ export namespace CourseGetAllCourses {
 
     export class Request {
         @ValidateNested()
-        @Type(() => GetAllCoursesDto)
+        @Type(() => GetAllCoursesQueryDto)
         @IsOptional()
-        query?: GetAllCoursesDto
+        query?: GetAllCoursesQueryDto
     }
 
     export class Response { 

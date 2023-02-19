@@ -10,7 +10,7 @@ import {
     UsePipes,
     ValidationPipe
 } from '@nestjs/common';
-import { CourseCreateCourse, CourseGetAllCourses, CourseGetCourse, GetAllCoursesDto } from '@services/contracts';
+import { CourseCreateCourse, CourseGetAllCourses, CourseGetCourse, GetAllCoursesQueryDto } from '@services/contracts';
 import { RMQService } from 'nestjs-rmq';
 import { CreateCourseDto } from '../dtos/course/create-course.dto';
 import { JwtAuthGuard } from '../guards/jwt.guard';
@@ -52,7 +52,7 @@ export class CourseController {
 
     @UsePipes(ValidationPipe)
     @Get()
-    async getAllCourses(@Query() query: GetAllCoursesDto): Promise<CourseGetAllCourses.Response> {
+    async getAllCourses(@Query() query: GetAllCoursesQueryDto): Promise<CourseGetAllCourses.Response> {
         try {
             return this.rmqService.send(CourseGetAllCourses.topic, { query })
         } catch (e) {
