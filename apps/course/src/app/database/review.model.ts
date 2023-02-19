@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IReview } from '@services/interfaces';
-import { Document } from 'mongoose'
-
+import { Document, Schema as MongooseSchema } from 'mongoose'
 
 @Schema({ timestamps: true })
 export class Review extends Document implements IReview {
@@ -16,10 +15,10 @@ export class Review extends Document implements IReview {
     @Prop( { required: true } )
     rating: number
 
-    @Prop({ required: true })
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Course' })
     courseId: string
 
-    @Prop({ required: true })
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'User' })
     userId: string
 }
 

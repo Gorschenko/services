@@ -23,15 +23,8 @@ export class ReviewRepository {
     async findByCourseId(courseId: string, query: GetCourseReviewsQueryDto): Promise<IReview[]> {
         const sortArgs = this.getSortArgs(query.sort)
         return await this.reviewModel
-            .aggregate()
-            .match({ courseId })
+            .find({ courseId })
             .sort(sortArgs)
-            // .lookup({
-            //     from: 'User',
-            //     localField: '_id',
-            //     foreignField: 'userId',
-            //     as: 'user',
-            // })
             .exec() as IReview[]
     }
 
