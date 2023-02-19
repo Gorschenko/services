@@ -11,7 +11,7 @@ export class ReviewQueries {
     
     @RMQValidate()
     @RMQRoute(ReviewGetCourseReviews.topic)
-    async getCourseReviews(@Body() { courseId }: ReviewGetCourseReviews.Request): Promise<ReviewGetCourseReviews.Response> {
-        return await this.reviewService.getCourseReviews(courseId)
+    async getCourseReviews(@Body() { courseId, query }: ReviewGetCourseReviews.Request): Promise<ReviewGetCourseReviews.Response> {
+        return await this.reviewService.getCourseReviews(courseId, query)
     }
 }

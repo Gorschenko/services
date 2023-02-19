@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ReviewUpdateReview } from '@services/contracts';
+import { GetCourseReviewsQueryDto, ReviewUpdateReview } from '@services/contracts';
 import { IReview } from '@services/interfaces';
-import { ReviewEntity } from './controllers/review.entity';
+import { ReviewEntity } from './review.entity';
 import { ReviewRepository } from './review.repository';
 
 @Injectable()
@@ -17,8 +17,8 @@ export class ReviewService {
         }
     }
 
-    async getCourseReviews(courseId: string): Promise<{ reviews: IReview[] }> {
-        const reviews = await this.reviewRepository.findByCourseId(courseId)
+    async getCourseReviews(courseId: string, query: GetCourseReviewsQueryDto): Promise<{ reviews: IReview[] }> {
+        const reviews = await this.reviewRepository.findByCourseId(courseId, query)
         return {
             reviews
         }

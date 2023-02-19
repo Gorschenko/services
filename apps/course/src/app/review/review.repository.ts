@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { GetCourseReviewsQueryDto, ReviewSort } from '@services/contracts';
 import { IReview } from '@services/interfaces';
 import { Model } from 'mongoose';
 import { Review } from '../database/review.model';
@@ -19,8 +20,19 @@ export class ReviewRepository {
         return await this.reviewModel.findOne({ _id: reviewId }).exec()
     }
 
-    async findByCourseId(courseId: string): Promise<IReview[]> {
-        return await this.reviewModel.find({ courseId }).exec()
+    async findByCourseId(courseId: string, query: GetCourseReviewsQueryDto): Promise<IReview[]> {
+        const sortArgs = this.getSortArgs(query.sort)
+        return await this.reviewModel
+            .aggregate()
+            .match({ courseId })
+            .sort(sortArgs)
+            // .lookup({
+            //     from: 'User',
+            //     localField: '_id',
+            //     foreignField: 'userId',
+            //     as: 'user',
+            // })
+            .exec() as IReview[]
     }
 
     async findOneAndUpdate({ _id, ...rest }: IReview): Promise<IReview> {
@@ -29,5 +41,17 @@ export class ReviewRepository {
             { $set: { ...rest } },
             { new: true }
         )
+    }
+
+    getSortArgs (sort: ReviewSort): {[key: string]: 1 | -1} {
+        switch (sort) {
+            case ReviewSort.RatingUp:
+                return { rating: -1 }
+            case ReviewSort.RatingDown:
+                return { rating: 1 }
+            case ReviewSort.New:
+            default:
+                return { createdAt: -1 }
+        }
     }
 }

@@ -1,5 +1,17 @@
-import { BadRequestException, Body, Controller, Get, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
-import { ReviewCreateReview, ReviewGetCourseReviews, ReviewUpdateReview } from '@services/contracts';
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    Param,
+    Post,
+    Put,
+    Query,
+    UseGuards,
+    UsePipes,
+    ValidationPipe
+} from '@nestjs/common';
+import { GetCourseReviewsQueryDto, ReviewCreateReview, ReviewGetCourseReviews, ReviewUpdateReview } from '@services/contracts';
 import { IReview } from '@services/interfaces';
 import { RMQService,  } from 'nestjs-rmq';
 import { CreateReviewDto } from '../dtos/review/create-review.dto';
@@ -27,10 +39,14 @@ export class ReviewController {
         }
     }
 
+    @UsePipes(ValidationPipe)
     @Get('course/:courseId')
-    async getCourseReviews(@Param('courseId', IdValidationPipe) courseId: string): Promise<ReviewGetCourseReviews.Response> {
+    async getCourseReviews(
+        @Param('courseId', IdValidationPipe) courseId: string,
+        @Query() query: GetCourseReviewsQueryDto,
+    ): Promise<ReviewGetCourseReviews.Response> {
         try {
-            return this.rmqService.send(ReviewGetCourseReviews.topic, { courseId })
+            return this.rmqService.send(ReviewGetCourseReviews.topic, { courseId, query })
         } catch (e) {
             if (e instanceof Error) {
                 throw new BadRequestException(e.message)
