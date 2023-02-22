@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CourseSort, GetAllCoursesQueryDto } from '@services/contracts';
 import { ICourse } from '@services/interfaces';
 import { Model } from 'mongoose';
-import { Course } from '../../../../../libs/database/src/lib/models/course.model';
+import { Course } from '@services/database';
 
 @Injectable()
 export class CourseRepository {
@@ -21,14 +21,13 @@ export class CourseRepository {
     }
 
     async find({ sort, offset, limit, category, level, languages }: GetAllCoursesQueryDto): Promise<ICourse[]> {
-        const sortArgs = this.getSortArgs(sort)
-        const filters = this.getValidFilters({ category, level, languages })
         return await this.courseModel
-            .find(filters)
-            .sort(sortArgs)
-            .limit(limit)
-            .skip(offset)
-            .exec()
+            .aggregate()
+            .match(this.getValidFilters({ category, level, languages }))
+            .limit(limit ? +limit : 25)
+            .skip(offset ? +offset : 0)
+            .sort(this.getSortArgs(sort))
+            .exec() as unknown as ICourse[]
     }
 
     getSortArgs (sort: CourseSort): {[key: string]: 1 | -1} {

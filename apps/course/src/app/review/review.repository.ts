@@ -20,14 +20,29 @@ export class ReviewRepository {
         return await this.reviewModel.findOne({ _id: reviewId }).exec()
     }
 
-    async findByCourseId(courseId: string, query: GetCourseReviewsQueryDto): Promise<IReview[]> {
-        const sortArgs = this.getSortArgs(query.sort)
+    async findByCourseId(courseId: string, { sort, limit, offset }: GetCourseReviewsQueryDto): Promise<IReview[]> {
         return await this.reviewModel
-            .find({ courseId })
-            .limit(query.limit)
-            .skip(query.offset)
-            .sort(sortArgs)
-            .exec()
+            .aggregate()
+            .match({ courseId })
+            .limit(limit ? +limit : 25)
+            .skip(offset ? +offset : 0)
+            .sort(this.getSortArgs(sort))
+            .addFields({
+                userId: {
+                    $toObjectId: '$userId'
+                }
+            })
+            .lookup({
+                from: 'users',
+                localField: 'userId',
+                foreignField: '_id',
+                as: 'user',
+            })
+            .unwind('$user')
+            .project({
+                'user.passwordHash': 0,
+            })
+            .exec() as unknown as IReview[]
     }
 
     async findOneAndUpdate({ _id, ...rest }: IReview): Promise<IReview> {
