@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CourseSort, GetAllCoursesQueryDto } from '@services/contracts';
 import { ICourse } from '@services/interfaces';
 import { Model } from 'mongoose';
-import { Course } from '../database/course.model';
+import { Course } from '../../../../../libs/database/src/lib/models/course.model';
 
 @Injectable()
 export class CourseRepository {

@@ -4,7 +4,7 @@ import { UserCommands } from './controllers/user.commands';
 import { UserEventEmiter } from './controllers/user.event-emiter';
 import { UserQueries } from './controllers/user.queries';
 import { UserService } from './user.service';
-import { User, UserSchema } from '../database/user.model';
+import { User, UserSchema } from '@services/database';
 import { UserRepository } from './user.repository';
 
 @Module({

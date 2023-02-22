@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@services/contracts": ["libs/contracts/src/index.ts"],
+      "@services/database": ["libs/database/src/index.ts"],
       "@services/interfaces": ["libs/interfaces/src/index.ts"]
     }
   },

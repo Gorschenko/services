@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { GetCourseReviewsQueryDto, ReviewSort } from '@services/contracts';
 import { IReview } from '@services/interfaces';
 import { Model } from 'mongoose';
-import { Review } from '../database/review.model';
+import { Review } from '@services/database';
 
 @Injectable()
 export class ReviewRepository {
