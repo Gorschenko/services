@@ -22,7 +22,7 @@ export class FilesController {
     @HttpCode(200)
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(FileInterceptor('files'))
-    async uploadFile(@UploadedFile() file: UploadFileDto): Promise<FilesUploadFile.Response[]> {
+    async uploadFile(@UploadedFile() file: UploadFileDto): Promise<FilesUploadFile.Response> {
         return this.rmqService.send(FilesUploadFile.topic, { file })
     }
 }

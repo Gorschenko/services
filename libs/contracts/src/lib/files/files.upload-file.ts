@@ -14,7 +14,7 @@ export namespace FilesUploadFile {
         file: Express.Multer.File
     }
 
-    export class Response extends FileElementResponse {
-
+    export class Response {
+        file: FileElementResponse[]
     }
 }
