@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { path } from 'app-root-path';
 import { RMQModule } from 'nestjs-rmq';
 import { getJWTConfig } from './configs/jwt.config';
 import { getRMQConfig } from './configs/rmq.config';
@@ -29,6 +31,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getJWTConfig,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: `${path}/uploads`,
+      serveRoot: '/static',
     }),
     PassportModule,
     RMQModule.forRootAsync(getRMQConfig()),

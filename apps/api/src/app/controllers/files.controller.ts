@@ -23,7 +23,6 @@ export class FilesController {
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(FileInterceptor('files'))
     async uploadFile(@UploadedFile() file: UploadFileDto): Promise<FilesUploadFile.Response> {
-        console.log('api file', file)
         return this.rmqService.send(FilesUploadFile.topic, { file })
     }
 }
