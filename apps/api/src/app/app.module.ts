@@ -7,6 +7,7 @@ import { getJWTConfig } from './configs/jwt.config';
 import { getRMQConfig } from './configs/rmq.config';
 import { AuthController } from './controllers/auth.controller';
 import { CourseController } from './controllers/course.controller';
+import { FilesController } from './controllers/files.controller';
 import { ReviewController } from './controllers/review.contoller';
 import { UserController } from './controllers/user.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
@@ -17,6 +18,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     UserController,
     CourseController,
     ReviewController,
+    FilesController,
   ],
   imports: [
     ConfigModule.forRoot({

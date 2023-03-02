@@ -15,6 +15,6 @@ export namespace FilesUploadFile {
     }
 
     export class Response {
-        file: FileElementResponse[]
+        files: FileElementResponse[]
     }
 }

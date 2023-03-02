@@ -9,6 +9,7 @@ import { ensureDir, writeFile } from 'fs-extra';
 @Injectable()
 export class FilesService {
     async convertToWebP(file: Buffer): Promise<Buffer> {
+        console.log('sharp file', file)
         return sharp(file).webp().toBuffer()
     }
 

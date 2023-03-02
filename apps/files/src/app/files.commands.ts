@@ -1,7 +1,8 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { FilesUploadFile } from '@services/contracts';
 import { FilesService } from './files.service';
 import { MFile } from './mfile.class';
+import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 
 @Controller('files')
 export class FilesCommands {
@@ -9,7 +10,10 @@ export class FilesCommands {
         private readonly filesService: FilesService
     ) {}
 
-    async uplodaFile({ file }: FilesUploadFile.Request): Promise<FilesUploadFile.Response> {
+    @RMQValidate()
+    @RMQRoute(FilesUploadFile.topic)
+    async uploadFile(@Body() { file }: FilesUploadFile.Request): Promise<FilesUploadFile.Response> {
+        console.log('service file', file)
         const saveArray: MFile[] = [new MFile(file)]
         if (file.mimetype.includes('image')) {
             const buffer = await this.filesService.convertToWebP(file.buffer)
@@ -17,8 +21,10 @@ export class FilesCommands {
                 originalname: `${file.originalname.split('.')[0]}.webp`,
                 buffer,
             })
+            console.log('newFile', newFile)
             saveArray.push(newFile)
         }
-        return this.filesService.saveFiles(saveArray)
+        const files = await this.filesService.saveFiles(saveArray)
+        return { files }
     }
 }
