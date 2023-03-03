@@ -21,6 +21,6 @@ const getRMQOptions = (configService: ConfigService): IRMQServiceOptions => {
         ],
         queueName: configService.get('AMQP_QUEUE'),
         prefetchCount: 32,
-        serviceName: 'admin.account',
+        serviceName: 'admin.course',
     }
 }

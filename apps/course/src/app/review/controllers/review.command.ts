@@ -8,13 +8,13 @@ import { ReviewService } from '../review.service';
 export class ReviewCommands {
     constructor (
         private readonly reviewService: ReviewService,
-        // private readonly telegramService: TelegramService
+        private readonly telegramService: TelegramService
     ) {}
 
     @RMQValidate()
     @RMQRoute(ReviewCreateReview.topic)
     async createReview(@Body() review: ReviewCreateReview.Request): Promise<ReviewCreateReview.Response> {
-        // await this.telegramService.sendMessage('test')
+        await this.telegramService.sendMessage(review.description)
         return await this.reviewService.createReview(review)
     }
 
