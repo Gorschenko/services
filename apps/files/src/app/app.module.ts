@@ -2,18 +2,17 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { RMQModule } from 'nestjs-rmq';
 import { getRMQConfig } from './configs/rmq.config';
-import { FilesCommands } from './files.commands';
-import { FilesService } from './files.service';
+import { FilesModule } from './files/files.module';
+import { TelegramModule } from './telegram/telegram.module';
 @Module({
-
-  controllers: [FilesCommands],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: 'envs/.files.env'
+      envFilePath: 'envs/.files.env',
     }),
     RMQModule.forRootAsync(getRMQConfig()),
+    TelegramModule,
+    FilesModule,
   ],
-  providers: [FilesService],
 })
 export class AppModule {}
