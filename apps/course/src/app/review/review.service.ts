@@ -10,7 +10,7 @@ export class ReviewService {
         private readonly reviewRepository: ReviewRepository
     ) {}
 
-    async createCourse(review: IReview): Promise<{ review: IReview }> {
+    async createReview(review: IReview): Promise<{ review: IReview }> {
         const newReview = await this.reviewRepository.createReview(review)
         return {
             review: newReview,

@@ -1,18 +1,21 @@
 import { Body, Controller } from '@nestjs/common';
 import { ReviewCreateReview, ReviewUpdateReview } from '@services/contracts';
+import { TelegramService } from '@services/telegram';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { ReviewService } from '../review.service';
 
 @Controller()
 export class ReviewCommands {
     constructor (
-        private readonly reviewService: ReviewService
+        private readonly reviewService: ReviewService,
+        // private readonly telegramService: TelegramService
     ) {}
 
     @RMQValidate()
     @RMQRoute(ReviewCreateReview.topic)
-    async createCourse(@Body() review: ReviewCreateReview.Request): Promise<ReviewCreateReview.Response> {
-        return await this.reviewService.createCourse(review)
+    async createReview(@Body() review: ReviewCreateReview.Request): Promise<ReviewCreateReview.Response> {
+        // await this.telegramService.sendMessage('test')
+        return await this.reviewService.createReview(review)
     }
 
     @RMQValidate()
